@@ -1,5 +1,5 @@
 Guía gráfica
-<img width="1323" height="705" alt="Image" src="https://github.com/user-attachments/assets/87cfc507-6307-4719-99fe-eece28372eca" />
+<img width="1323" height="705" alt="Image" src="https://github.com/user-attachments/assets/4a9e6d96-7da2-4b78-aee8-95db31278071" />
 
 # La repartición queda así
 ### Gargatt - Booking
