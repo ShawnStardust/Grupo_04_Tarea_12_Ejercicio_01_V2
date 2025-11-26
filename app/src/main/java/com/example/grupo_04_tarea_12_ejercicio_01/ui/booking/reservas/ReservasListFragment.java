@@ -2,30 +2,28 @@ package com.example.grupo_04_tarea_12_ejercicio_01.ui.booking.reservas;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import com.example.grupo_04_tarea_12_ejercicio_01.R;
 import com.example.grupo_04_tarea_12_ejercicio_01.domain.model.Reserva;
-import com.example.grupo_04_tarea_12_ejercicio_01.domain.usecase.ReservaUseCase;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.inject.Inject;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class ReservasListFragment extends Fragment {
 
-    @Inject
-    ReservaUseCase reservaUseCase;
-
+    private ReservasViewModel viewModel;
     private RecyclerView recyclerViewReservas;
     private TextView tvEmptyReservas;
     private FloatingActionButton fabAddReserva;
@@ -41,6 +39,9 @@ public class ReservasListFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_reservas_list, container, false);
 
+        // Inicializar ViewModel
+        viewModel = new ViewModelProvider(this).get(ReservasViewModel.class);
+
         // Inicializar vistas
         recyclerViewReservas = view.findViewById(R.id.recyclerViewReservas);
         tvEmptyReservas = view.findViewById(R.id.tvEmptyReservas);
@@ -55,41 +56,53 @@ public class ReservasListFragment extends Fragment {
         // Configurar FAB
         fabAddReserva.setOnClickListener(v -> openReservaForm(null));
 
-        // Cargar datos
-        loadReservas();
+        // Observar LiveData
+        observeViewModel();
 
         return view;
     }
 
-    private void loadReservas() {
-        // Ejecutar en un hilo separado
-        new Thread(() -> {
-            List<Reserva> reservas = reservaUseCase.getAllReservas();
+    private void observeViewModel() {
+        // Observar lista de reservas
+        viewModel.reservasLiveData.observe(getViewLifecycleOwner(), reservas -> {
+            if (reservas != null) {
+                reservasList.clear();
+                reservasList.addAll(reservas);
+                adapter.notifyDataSetChanged();
 
-            // Actualizar UI en el hilo principal
-            if (getActivity() != null) {
-                getActivity().runOnUiThread(() -> {
-                    reservasList.clear();
-                    reservasList.addAll(reservas);
-                    adapter.notifyDataSetChanged();
-
-                    // Mostrar mensaje si está vacío
-                    if (reservasList.isEmpty()) {
-                        recyclerViewReservas.setVisibility(View.GONE);
-                        tvEmptyReservas.setVisibility(View.VISIBLE);
-                    } else {
-                        recyclerViewReservas.setVisibility(View.VISIBLE);
-                        tvEmptyReservas.setVisibility(View.GONE);
-                    }
-                });
+                // Mostrar mensaje si está vacío
+                if (reservasList.isEmpty()) {
+                    recyclerViewReservas.setVisibility(View.GONE);
+                    tvEmptyReservas.setVisibility(View.VISIBLE);
+                } else {
+                    recyclerViewReservas.setVisibility(View.VISIBLE);
+                    tvEmptyReservas.setVisibility(View.GONE);
+                }
             }
-        }).start();
+        });
+
+        // Observar estado de carga
+        viewModel.isLoadingLiveData.observe(getViewLifecycleOwner(), isLoading -> {
+            // Aquí puedes mostrar/ocultar un ProgressBar si lo tienes
+            if (isLoading != null && isLoading) {
+                // Mostrar loading
+            } else {
+                // Ocultar loading
+            }
+        });
+
+        // Observar errores
+        viewModel.errorLiveData.observe(getViewLifecycleOwner(), error -> {
+            if (error != null && !error.isEmpty()) {
+                Toast.makeText(getContext(), error, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void openReservaForm(Reserva reserva) {
         // Aquí abrirías un dialog o fragment para crear/editar
         // Por ahora solo recargaremos la lista
-        loadReservas();
+        viewModel.loadReservas();
     }
 
     private void onEditReserva(Reserva reserva) {
@@ -97,12 +110,6 @@ public class ReservasListFragment extends Fragment {
     }
 
     private void onDeleteReserva(Reserva reserva) {
-        new Thread(() -> {
-            reservaUseCase.deleteReserva(reserva);
-
-            if (getActivity() != null) {
-                getActivity().runOnUiThread(this::loadReservas);
-            }
-        }).start();
+        viewModel.deleteReserva(reserva);
     }
 }
