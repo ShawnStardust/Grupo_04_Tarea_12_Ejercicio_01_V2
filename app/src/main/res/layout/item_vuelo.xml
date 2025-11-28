@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="4dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+
+            <TextView
+                android:id="@+id/tvVueloId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                tools:text="Vuelo ID: 101"
+                android:textStyle="bold"
+                android:textSize="16sp"
+                android:textColor="#9C27B0"/>
+
+            <TextView
+                android:id="@+id/tvVueloFecha"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="2025-12-25"
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvVueloRuta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Ruta: LIMA (LIM) → SANTIAGO (SCL)"
+            android:textSize="14sp"
+            android:textColor="#333333"
+            android:textStyle="italic"
+            android:layout_marginBottom="4dp"/>
+
+        <TextView
+            android:id="@+id/tvVueloDetalles"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="Avión ID: 3 | Filas: 40"
+            android:textSize="14sp"
+            android:textColor="#666666"
+            android:layout_marginBottom="12dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="12dp"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/tvVueloHora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="Salida: 14:30"
+                android:textSize="14sp"
+                android:textColor="#FF5722"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="end">
+
+            <Button
+                android:id="@+id/btnEditVuelo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Editar"
+                android:textSize="12sp"
+                android:backgroundTint="#FFC107"
+                android:layout_marginEnd="8dp"/>
+
+            <Button
+                android:id="@+id/btnDeleteVuelo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Eliminar"
+                android:textSize="12sp"
+                android:backgroundTint="#F44336"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

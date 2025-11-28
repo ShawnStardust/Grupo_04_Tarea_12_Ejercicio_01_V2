@@ -1,15 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".ui.vuelos.VuelosFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Tuesta" />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="12dp">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Vuelos"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Crea, edita y administra la información de los vuelos disponibles."
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/btnVerVuelos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver Vuelos"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#00BCD4"/> </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gestión de Tarifas"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Define clases, precios e impuestos asociados a las tarifas de los vuelos."
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/btnVerTarifas"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver Tarifas"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FF9800"/> </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

@@ -4,6 +4,7 @@ import com.example.grupo_04_tarea_12_ejercicio_01.data.local.dao.VueloDao;
 import com.example.grupo_04_tarea_12_ejercicio_01.domain.Repository.VueloRepository;
 import com.example.grupo_04_tarea_12_ejercicio_01.domain.model.Vuelo;
 
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -55,6 +56,11 @@ public class VueloRepositoryImpl implements VueloRepository {
     @Override
     public List<Vuelo> getByOrigenDestino(int idOrigen, int idDestino) {
         return vueloDao.getByOrigenDestino(idOrigen, idDestino);
+    }
+
+    @Override
+    public List<Vuelo> getByRuta(int idAeropuertoOrigen, int idAeropuertoDestino) {
+        return Collections.emptyList();
     }
 
     @Override

@@ -110,7 +110,7 @@ public class MockDataProvider {
         return avion;
     }
 
-    // TARIFAS
+    // --- 💰 TARIFAS CORREGIDAS ---
     public static List<Tarifa> getTarifas() {
         List<Tarifa> tarifas = new ArrayList<>();
 
@@ -118,6 +118,9 @@ public class MockDataProvider {
         tarifas.add(createTarifa(2, "Premium Economy", 300.00, 36.00));
         tarifas.add(createTarifa(3, "Business", 800.00, 96.00));
         tarifas.add(createTarifa(4, "Primera Clase", 1500.00, 180.00));
+        tarifas.add(createTarifa(5, "Light", 100.00, 12.00));
+        tarifas.add(createTarifa(6, "Full", 450.00, 54.00));
+
 
         return tarifas;
     }
@@ -130,6 +133,7 @@ public class MockDataProvider {
         tarifa.setImpuesto(impuesto);
         return tarifa;
     }
+    // -----------------------------------
 
     // VUELOS
     public static List<Vuelo> getVuelos() {
