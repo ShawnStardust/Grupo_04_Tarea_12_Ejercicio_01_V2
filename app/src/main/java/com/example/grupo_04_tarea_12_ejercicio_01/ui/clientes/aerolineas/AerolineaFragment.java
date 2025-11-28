@@ -68,6 +68,10 @@ public class AerolineaFragment extends Fragment {
             dialog.show(getParentFragmentManager(), "AgregarAero");
         });
 
+        view.findViewById(R.id.btnVolver).setOnClickListener(v -> {
+            getParentFragmentManager().popBackStack();
+        });
+
         return view;
     }
 

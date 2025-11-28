@@ -70,6 +70,10 @@ public class PaisFragment extends Fragment {
             dialog.show(getParentFragmentManager(), "AgregarPaisDialog");
         });
 
+        view.findViewById(R.id.btnVolver).setOnClickListener(v -> {
+            getParentFragmentManager().popBackStack();
+        });
+
         return view;
     }
     private void mostrarConfirmacionBorrar(Pais pais) {

@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +37,8 @@ public class PasajeroFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.rvPasajeros);
         FloatingActionButton fab = view.findViewById(R.id.fabAddPasajero);
         tvEmptyView = view.findViewById(R.id.tvEmptyPasajeros);
+        ImageButton btnVolver = view.findViewById(R.id.btnVolver);
+
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
@@ -54,6 +57,7 @@ public class PasajeroFragment extends Fragment {
         });
         recyclerView.setAdapter(adapter);
 
+
         viewModel = new ViewModelProvider(requireActivity()).get(ClientesViewModel.class);
 
         viewModel.getListaPasajeros().observe(getViewLifecycleOwner(), lista -> {
@@ -71,6 +75,10 @@ public class PasajeroFragment extends Fragment {
         fab.setOnClickListener(v -> {
             AgregarPasajeroDialog dialog = new AgregarPasajeroDialog();
             dialog.show(getParentFragmentManager(), "AgregarPasajeroDialog");
+        });
+
+        btnVolver.setOnClickListener(v -> {
+            getParentFragmentManager().popBackStack();
         });
 
         return view;
