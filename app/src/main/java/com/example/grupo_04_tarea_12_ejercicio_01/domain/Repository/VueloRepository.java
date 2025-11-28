@@ -13,6 +13,9 @@ public interface VueloRepository {
     List<Vuelo> getByOrigen(int idOrigen);
     List<Vuelo> getByDestino(int idDestino);
     List<Vuelo> getByOrigenDestino(int idOrigen, int idDestino);
+
+    List<Vuelo> getByRuta(int idAeropuertoOrigen, int idAeropuertoDestino);
+
     List<Vuelo> getByAvion(int idAvion);
     void deleteAll();
 }

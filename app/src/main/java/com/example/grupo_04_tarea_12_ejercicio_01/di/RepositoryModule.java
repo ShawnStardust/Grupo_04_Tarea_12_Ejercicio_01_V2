@@ -2,6 +2,8 @@ package com.example.grupo_04_tarea_12_ejercicio_01.di;
 
 import com.example.grupo_04_tarea_12_ejercicio_01.data.mock.FakePagoRepositoryImpl;
 import com.example.grupo_04_tarea_12_ejercicio_01.data.mock.FakeReservaRepositoryImpl;
+import com.example.grupo_04_tarea_12_ejercicio_01.data.mock.FakeTarifaRepositoryImpl;
+import com.example.grupo_04_tarea_12_ejercicio_01.data.mock.FakeVueloRepositoryImpl;
 import com.example.grupo_04_tarea_12_ejercicio_01.data.repository.*;
 import com.example.grupo_04_tarea_12_ejercicio_01.domain.Repository.*;
 
@@ -43,7 +45,7 @@ public abstract class RepositoryModule {
     @Binds
     @Singleton
     public abstract VueloRepository bindVueloRepository(
-            VueloRepositoryImpl vueloRepositoryImpl
+            FakeVueloRepositoryImpl vueloRepositoryImpl
     );
 
     @Binds
@@ -55,7 +57,7 @@ public abstract class RepositoryModule {
     @Binds
     @Singleton
     public abstract TarifaRepository bindTarifaRepository(
-            TarifaRepositoryImpl tarifaRepositoryImpl
+            FakeTarifaRepositoryImpl tarifaRepositoryImpl
     );
 
     @Binds

@@ -12,5 +12,8 @@ public interface TarifaRepository {
     Tarifa getById(int id);
     Tarifa getByClase(String clase);
     List<Tarifa> getAllOrdenadoPorPrecio();
+
+    double getPrecioTotal(int idTarifa);
+
     void deleteAll();
 }

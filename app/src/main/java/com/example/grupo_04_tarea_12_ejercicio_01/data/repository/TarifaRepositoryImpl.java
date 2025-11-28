@@ -53,6 +53,11 @@ public class TarifaRepositoryImpl implements TarifaRepository {
     }
 
     @Override
+    public double getPrecioTotal(int idTarifa) {
+        return 0;
+    }
+
+    @Override
     public void deleteAll() {
         tarifaDao.deleteAll();
     }
