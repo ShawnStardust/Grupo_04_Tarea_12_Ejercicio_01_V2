@@ -10,6 +10,6 @@ public interface AerolineaRepository {
     void delete(Aerolinea aerolinea);
     List<Aerolinea> getAll();
     Aerolinea getById(int id);
-    List<Aerolinea> getByPais(int idPais);
     List<Aerolinea> searchByNombre(String nombre);
+    void deleteAll();
 }

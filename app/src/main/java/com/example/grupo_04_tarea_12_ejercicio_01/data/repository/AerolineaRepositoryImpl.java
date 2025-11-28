@@ -43,12 +43,12 @@ public class AerolineaRepositoryImpl implements AerolineaRepository {
     }
 
     @Override
-    public List<Aerolinea> getByPais(int idPais) {
-        return aerolineaDao.getByPais(idPais);
+    public List<Aerolinea> searchByNombre(String nombre) {
+        return aerolineaDao.searchByNombre(nombre);
     }
 
     @Override
-    public List<Aerolinea> searchByNombre(String nombre) {
-        return aerolineaDao.searchByNombre(nombre);
+    public void deleteAll() {
+        aerolineaDao.deleteAll();
     }
 }
