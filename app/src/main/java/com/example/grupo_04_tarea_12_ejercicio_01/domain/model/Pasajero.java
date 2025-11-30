@@ -4,8 +4,6 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import java.util.Date;
-
 @Entity(tableName = "pasajero")
 public class Pasajero {
 
@@ -13,11 +11,14 @@ public class Pasajero {
     @ColumnInfo(name = "idpasajero")
     private int idPasajero;
 
-    @ColumnInfo(name = "nombres")
-    private String nombres;
+    @ColumnInfo(name = "nombre")
+    private String nombre;
 
-    @ColumnInfo(name = "apellidos")
-    private String apellidos;
+    @ColumnInfo(name = "apaterno")
+    private String apaterno;
+
+    @ColumnInfo(name = "amaterno")
+    private String amaterno;
 
     @ColumnInfo(name = "tipo_documento")
     private String tipoDocumento;
@@ -26,7 +27,7 @@ public class Pasajero {
     private String numDocumento;
 
     @ColumnInfo(name = "fecha_nacimiento")
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
 
     @ColumnInfo(name = "idpais")
     private int idPais;
@@ -40,16 +41,13 @@ public class Pasajero {
     @ColumnInfo(name = "clave")
     private String clave;
 
-    // Constructor vacío
     public Pasajero() {
     }
 
-    // Constructor completo
-    public Pasajero(String nombres, String apellidos, String aMaterno, String tipoDocumento,
-                    String numDocumento, Date fechaNacimiento, int idPais, String telefono,
-                    String email, String clave) {
-        this.nombres = nombres;
-        this.apellidos = apellidos;
+    public Pasajero(String nombre, String apaterno, String amaterno, String tipoDocumento, String numDocumento, String fechaNacimiento, int idPais, String telefono, String email, String clave) {
+        this.nombre = nombre;
+        this.apaterno = apaterno;
+        this.amaterno = amaterno;
         this.tipoDocumento = tipoDocumento;
         this.numDocumento = numDocumento;
         this.fechaNacimiento = fechaNacimiento;
@@ -59,84 +57,36 @@ public class Pasajero {
         this.clave = clave;
     }
 
-    // Getters y Setters
-    public int getIdPasajero() {
-        return idPasajero;
-    }
+    public int getIdPasajero() { return idPasajero; }
+    public void setIdPasajero(int idPasajero) { this.idPasajero = idPasajero; }
 
-    public void setIdPasajero(int idPasajero) {
-        this.idPasajero = idPasajero;
-    }
+    public String getNombre() { return nombre; }
+    public void setNombre(String nombre) { this.nombre = nombre; }
 
-    public String getNombres() {
-        return nombres;
-    }
+    public String getApaterno() { return apaterno; }
+    public void setApaterno(String apaterno) { this.apaterno = apaterno; }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
+    public String getAmaterno() { return amaterno; }
+    public void setAmaterno(String amaterno) { this.amaterno = amaterno; }
 
-    public String getApellidos() {
-        return apellidos;
-    }
+    public String getTipoDocumento() { return tipoDocumento; }
+    public void setTipoDocumento(String tipoDocumento) { this.tipoDocumento = tipoDocumento; }
 
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
+    public String getNumDocumento() { return numDocumento; }
+    public void setNumDocumento(String numDocumento) { this.numDocumento = numDocumento; }
 
-    public String getTipoDocumento() {
-        return tipoDocumento;
-    }
+    public String getFechaNacimiento() { return fechaNacimiento; }
+    public void setFechaNacimiento(String fechaNacimiento) { this.fechaNacimiento = fechaNacimiento; }
 
-    public void setTipoDocumento(String tipoDocumento) {
-        this.tipoDocumento = tipoDocumento;
-    }
+    public int getIdPais() { return idPais; }
+    public void setIdPais(int idPais) { this.idPais = idPais; }
 
-    public String getNumDocumento() {
-        return numDocumento;
-    }
+    public String getTelefono() { return telefono; }
+    public void setTelefono(String telefono) { this.telefono = telefono; }
 
-    public void setNumDocumento(String numDocumento) {
-        this.numDocumento = numDocumento;
-    }
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
 
-    public Date getFechaNacimiento() {
-        return fechaNacimiento;
-    }
-
-    public void setFechaNacimiento(Date fechaNacimiento) {
-        this.fechaNacimiento = fechaNacimiento;
-    }
-
-    public int getIdPais() {
-        return idPais;
-    }
-
-    public void setIdPais(int idPais) {
-        this.idPais = idPais;
-    }
-
-    public String getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(String telefono) {
-        this.telefono = telefono;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getClave() {
-        return clave;
-    }
-
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
+    public String getClave() { return clave; }
+    public void setClave(String clave) { this.clave = clave; }
 }

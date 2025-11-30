@@ -5,8 +5,7 @@ import com.example.grupo_04_tarea_12_ejercicio_01.domain.Repository.PasajeroRepo
 import com.example.grupo_04_tarea_12_ejercicio_01.domain.model.Pasajero;
 
 import java.util.List;
-
-import jakarta.inject.Inject;
+import javax.inject.Inject;
 
 public class PasajeroRepositoryImpl implements PasajeroRepository {
 
@@ -43,18 +42,8 @@ public class PasajeroRepositoryImpl implements PasajeroRepository {
     }
 
     @Override
-    public Pasajero getByEmail(String email) {
-        return pasajeroDao.getByEmail(email);
-    }
-
-    @Override
-    public Pasajero getByDocumento(String numDocumento) {
-        return pasajeroDao.getByDocumento(numDocumento);
-    }
-
-    @Override
-    public Pasajero login(String email, String clave) {
-        return pasajeroDao.login(email, clave);
+    public List<Pasajero> searchByNombre(String nombre) {
+        return pasajeroDao.searchByNombre(nombre);
     }
 
     @Override

@@ -28,9 +28,6 @@ public interface AerolineaDao {
     @Query("SELECT * FROM aerolinea WHERE idaerolinea = :id")
     Aerolinea getById(int id);
 
-    @Query("SELECT * FROM aerolinea WHERE idpais = :idPais")
-    List<Aerolinea> getByPais(int idPais);
-
     @Query("SELECT * FROM aerolinea WHERE nombre LIKE :nombre || '%'")
     List<Aerolinea> searchByNombre(String nombre);
 

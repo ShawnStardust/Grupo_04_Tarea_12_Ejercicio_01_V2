@@ -28,14 +28,9 @@ public interface PasajeroDao {
     @Query("SELECT * FROM pasajero WHERE idpasajero = :id")
     Pasajero getById(int id);
 
-    @Query("SELECT * FROM pasajero WHERE email = :email LIMIT 1")
-    Pasajero getByEmail(String email);
-
-    @Query("SELECT * FROM pasajero WHERE num_documento = :numDocumento LIMIT 1")
-    Pasajero getByDocumento(String numDocumento);
-
-    @Query("SELECT * FROM pasajero WHERE email = :email AND clave = :clave LIMIT 1")
-    Pasajero login(String email, String clave);
+    // Búsqueda por nombre o apellido
+    @Query("SELECT * FROM pasajero WHERE nombre LIKE :busqueda || '%' OR apaterno LIKE :busqueda || '%'")
+    List<Pasajero> searchByNombre(String busqueda);
 
     @Query("DELETE FROM pasajero")
     void deleteAll();
