@@ -14,8 +14,8 @@ public class PasajeroDisplayItem {
         this.pasajero = pasajero;
 
         // Construir texto descriptivo
-        String nombres = pasajero.getNombres() != null ? pasajero.getNombres() : "";
-        String apellidos = pasajero.getApellidos() != null ? pasajero.getApellidos() : "";
+        String nombres = pasajero.getNombre() != null ? pasajero.getNombre() : "";
+        String apellidos = pasajero.getApaterno() != null ? pasajero.getApaterno() : "";
 
         // Formato: "Juan Pérez (DNI: 12345678)"
         this.displayText = String.format("%s %s (DNI: %s)",
