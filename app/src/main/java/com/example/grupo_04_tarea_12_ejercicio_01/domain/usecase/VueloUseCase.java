@@ -16,30 +16,18 @@ public class VueloUseCase {
         this.repository = repository;
     }
 
-    // ─────────────────────────────
-    // CREATE
-    // ─────────────────────────────
     public void insertVuelo(Vuelo vuelo) {
         repository.insert(vuelo);
     }
 
-    // ─────────────────────────────
-    // UPDATE
-    // ─────────────────────────────
     public void updateVuelo(Vuelo vuelo) {
         repository.update(vuelo);
     }
 
-    // ─────────────────────────────
-    // DELETE
-    // ─────────────────────────────
     public void deleteVuelo(Vuelo vuelo) {
         repository.delete(vuelo);
     }
 
-    // ─────────────────────────────
-    // READ
-    // ─────────────────────────────
     public List<Vuelo> getAllVuelos() {
         return repository.getAll();
     }

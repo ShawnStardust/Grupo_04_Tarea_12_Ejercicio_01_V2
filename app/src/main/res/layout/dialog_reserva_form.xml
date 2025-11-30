@@ -21,37 +21,41 @@
             android:textColor="#333333"
             android:layout_marginBottom="16dp"/>
 
-        <!-- ID Pasajero -->
+        <!-- Spinner Pasajero -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ID Pasajero"
+            android:hint="Seleccionar Pasajero"
             android:layout_marginBottom="12dp"
             app:boxBackgroundMode="outline"
-            app:startIconDrawable="@android:drawable/ic_menu_myplaces">
+            app:startIconDrawable="@android:drawable/ic_menu_myplaces"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etIdPasajero"
+            <AutoCompleteTextView
+                android:id="@+id/spinnerPasajero"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"/>
+                android:inputType="none"
+                android:focusable="false"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- ID Vuelo -->
+        <!-- Spinner Vuelo -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ID Vuelo"
+            android:hint="Seleccionar Vuelo"
             android:layout_marginBottom="12dp"
             app:boxBackgroundMode="outline"
-            app:startIconDrawable="@android:drawable/ic_menu_directions">
+            app:startIconDrawable="@android:drawable/ic_menu_directions"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etIdVuelo"
+            <AutoCompleteTextView
+                android:id="@+id/spinnerVuelo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"/>
+                android:inputType="none"
+                android:focusable="false"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

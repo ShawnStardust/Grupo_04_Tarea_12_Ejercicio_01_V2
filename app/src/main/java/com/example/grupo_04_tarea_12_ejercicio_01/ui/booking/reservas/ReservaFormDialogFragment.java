@@ -6,7 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -16,22 +17,35 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import com.example.grupo_04_tarea_12_ejercicio_01.R;
+import com.example.grupo_04_tarea_12_ejercicio_01.domain.model.Aeropuerto;
+import com.example.grupo_04_tarea_12_ejercicio_01.domain.model.Pasajero;
 import com.example.grupo_04_tarea_12_ejercicio_01.domain.model.Reserva;
+import com.example.grupo_04_tarea_12_ejercicio_01.domain.model.Vuelo;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
 public class ReservaFormDialogFragment extends DialogFragment {
 
-    private TextInputEditText etIdPasajero, etIdVuelo, etFecha, etCosto, etObservacion;
+    private AutoCompleteTextView spinnerPasajero, spinnerVuelo;
+    private TextInputEditText etFecha, etCosto, etObservacion;
     private TextView tvDialogTitle;
     private Button btnGuardar, btnCancelar;
+
     private Reserva reservaActual;
     private OnReservaSavedListener listener;
+
+    private List<PasajeroDisplayItem> pasajerosDisplayList = new ArrayList<>();
+    private List<VueloDisplayItem> vuelosDisplayList = new ArrayList<>();
+    private ArrayAdapter<String> pasajerosAdapter;
+    private ArrayAdapter<String> vuelosAdapter;
+
     private final Calendar calendar = Calendar.getInstance();
     private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
 
@@ -43,11 +57,38 @@ public class ReservaFormDialogFragment extends DialogFragment {
         this.listener = listener;
     }
 
-    public static ReservaFormDialogFragment newInstance(Reserva reserva) {
-        ReservaFormDialogFragment fragment = new ReservaFormDialogFragment();
-        if (reserva != null) {
-            fragment.reservaActual = reserva;
+    public void setPasajerosYVuelos(List<Pasajero> pasajeros, List<Vuelo> vuelos, List<Aeropuerto> aeropuertos) {
+        // Construir DisplayItems para pasajeros
+        this.pasajerosDisplayList.clear();
+        for (Pasajero p : pasajeros) {
+            this.pasajerosDisplayList.add(new PasajeroDisplayItem(p));
         }
+
+        // Construir DisplayItems para vuelos
+        this.vuelosDisplayList.clear();
+        for (Vuelo v : vuelos) {
+            Aeropuerto origen = findAeropuertoById(v.getIdAeropuertoOrigen(), aeropuertos);
+            Aeropuerto destino = findAeropuertoById(v.getIdAeropuertoDestino(), aeropuertos);
+            this.vuelosDisplayList.add(new VueloDisplayItem(v, origen, destino));
+        }
+    }
+
+    private Aeropuerto findAeropuertoById(int id, List<Aeropuerto> aeropuertos) {
+        for (Aeropuerto a : aeropuertos) {
+            if (a.getIdAeropuerto() == id) {
+                return a;
+            }
+        }
+        return null;
+    }
+
+    public static ReservaFormDialogFragment newInstance(Reserva reserva,
+                                                        List<Pasajero> pasajeros,
+                                                        List<Vuelo> vuelos,
+                                                        List<Aeropuerto> aeropuertos) {
+        ReservaFormDialogFragment fragment = new ReservaFormDialogFragment();
+        fragment.reservaActual = reserva;
+        fragment.setPasajerosYVuelos(pasajeros, vuelos, aeropuertos);
         return fragment;
     }
 
@@ -64,8 +105,9 @@ public class ReservaFormDialogFragment extends DialogFragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.dialog_reserva_form, container, false); // Asegúrate que el nombre del XML coincida
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.dialog_reserva_form, container, false);
     }
 
     @Override
@@ -73,6 +115,7 @@ public class ReservaFormDialogFragment extends DialogFragment {
         super.onViewCreated(view, savedInstanceState);
 
         initViews(view);
+        setupSpinners();
         setupDatePicker();
 
         if (reservaActual != null) {
@@ -86,13 +129,41 @@ public class ReservaFormDialogFragment extends DialogFragment {
 
     private void initViews(View view) {
         tvDialogTitle = view.findViewById(R.id.tvDialogTitle);
-        etIdPasajero = view.findViewById(R.id.etIdPasajero);
-        etIdVuelo = view.findViewById(R.id.etIdVuelo);
+        spinnerPasajero = view.findViewById(R.id.spinnerPasajero);
+        spinnerVuelo = view.findViewById(R.id.spinnerVuelo);
         etFecha = view.findViewById(R.id.etFecha);
         etCosto = view.findViewById(R.id.etCosto);
         etObservacion = view.findViewById(R.id.etObservacion);
         btnGuardar = view.findViewById(R.id.btnGuardar);
         btnCancelar = view.findViewById(R.id.btnCancelar);
+    }
+
+    private void setupSpinners() {
+        // Configurar Spinner de Pasajeros
+        List<String> pasajerosNames = new ArrayList<>();
+        for (PasajeroDisplayItem item : pasajerosDisplayList) {
+            pasajerosNames.add(item.getDisplayText());
+        }
+
+        pasajerosAdapter = new ArrayAdapter<>(
+                requireContext(),
+                android.R.layout.simple_dropdown_item_1line,
+                pasajerosNames
+        );
+        spinnerPasajero.setAdapter(pasajerosAdapter);
+
+        // Configurar Spinner de Vuelos
+        List<String> vuelosDisplay = new ArrayList<>();
+        for (VueloDisplayItem item : vuelosDisplayList) {
+            vuelosDisplay.add(item.getDisplayText());
+        }
+
+        vuelosAdapter = new ArrayAdapter<>(
+                requireContext(),
+                android.R.layout.simple_dropdown_item_1line,
+                vuelosDisplay
+        );
+        spinnerVuelo.setAdapter(vuelosAdapter);
     }
 
     private void setupDatePicker() {
@@ -102,15 +173,32 @@ public class ReservaFormDialogFragment extends DialogFragment {
                 calendar.set(Calendar.MONTH, month);
                 calendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
                 etFecha.setText(dateFormat.format(calendar.getTime()));
-            }, calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH)).show();
+            }, calendar.get(Calendar.YEAR),
+                    calendar.get(Calendar.MONTH),
+                    calendar.get(Calendar.DAY_OF_MONTH)).show();
         });
     }
 
     private void populateFields() {
-        etIdPasajero.setText(String.valueOf(reservaActual.getIdPasajero()));
-        etIdVuelo.setText(String.valueOf(reservaActual.getIdVuelo()));
+        // Buscar y seleccionar el pasajero
+        for (PasajeroDisplayItem item : pasajerosDisplayList) {
+            if (item.getIdPasajero() == reservaActual.getIdPasajero()) {
+                spinnerPasajero.setText(item.getDisplayText(), false);
+                break;
+            }
+        }
+
+        // Buscar y seleccionar el vuelo
+        for (VueloDisplayItem item : vuelosDisplayList) {
+            if (item.getIdVuelo() == reservaActual.getIdVuelo()) {
+                spinnerVuelo.setText(item.getDisplayText(), false);
+                break;
+            }
+        }
+
         etCosto.setText(String.valueOf(reservaActual.getCosto()));
         etObservacion.setText(reservaActual.getObservacion());
+
         if (reservaActual.getFecha() != null) {
             etFecha.setText(dateFormat.format(reservaActual.getFecha()));
             calendar.setTime(reservaActual.getFecha());
@@ -119,8 +207,48 @@ public class ReservaFormDialogFragment extends DialogFragment {
 
     private void guardarReserva() {
         try {
-            int idPasajero = Integer.parseInt(etIdPasajero.getText().toString());
-            int idVuelo = Integer.parseInt(etIdVuelo.getText().toString());
+            // Validar selección de pasajero
+            String pasajeroText = spinnerPasajero.getText().toString();
+            if (pasajeroText.isEmpty()) {
+                Toast.makeText(getContext(), "Seleccione un pasajero", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Obtener ID del pasajero seleccionado
+            int idPasajero = -1;
+            for (PasajeroDisplayItem item : pasajerosDisplayList) {
+                if (item.getDisplayText().equals(pasajeroText)) {
+                    idPasajero = item.getIdPasajero();
+                    break;
+                }
+            }
+
+            if (idPasajero == -1) {
+                Toast.makeText(getContext(), "Pasajero no válido", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Validar selección de vuelo
+            String vueloText = spinnerVuelo.getText().toString();
+            if (vueloText.isEmpty()) {
+                Toast.makeText(getContext(), "Seleccione un vuelo", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
+            // Obtener ID del vuelo seleccionado
+            int idVuelo = -1;
+            for (VueloDisplayItem item : vuelosDisplayList) {
+                if (item.getDisplayText().equals(vueloText)) {
+                    idVuelo = item.getIdVuelo();
+                    break;
+                }
+            }
+
+            if (idVuelo == -1) {
+                Toast.makeText(getContext(), "Vuelo no válido", Toast.LENGTH_SHORT).show();
+                return;
+            }
+
             double costo = Double.parseDouble(etCosto.getText().toString());
             Date fecha = dateFormat.parse(etFecha.getText().toString());
             String observacion = etObservacion.getText().toString();
@@ -141,11 +269,14 @@ public class ReservaFormDialogFragment extends DialogFragment {
             dismiss();
 
         } catch (NumberFormatException e) {
-            Toast.makeText(getContext(), "Por favor revise los números ingresados", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Por favor revise los números ingresados",
+                    Toast.LENGTH_SHORT).show();
         } catch (ParseException e) {
-            Toast.makeText(getContext(), "Formato de fecha inválido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Formato de fecha inválido",
+                    Toast.LENGTH_SHORT).show();
         } catch (Exception e) {
-            Toast.makeText(getContext(), "Complete todos los campos requeridos", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Complete todos los campos requeridos",
+                    Toast.LENGTH_SHORT).show();
         }
     }
 }

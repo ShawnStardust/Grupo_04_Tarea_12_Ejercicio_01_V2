@@ -57,20 +57,22 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- Tipo de Comprobante -->
+        <!-- Tipo de Comprobante (Spinner) -->
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Tipo de Comprobante"
             android:layout_marginBottom="12dp"
             app:boxBackgroundMode="outline"
-            app:startIconDrawable="@android:drawable/ic_menu_info_details">
+            app:startIconDrawable="@android:drawable/ic_menu_info_details"
+            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/etTipoComprobantePago"
+            <AutoCompleteTextView
+                android:id="@+id/spinnerTipoComprobante"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"/>
+                android:inputType="none"
+                android:focusable="false"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

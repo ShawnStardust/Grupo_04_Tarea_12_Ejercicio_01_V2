@@ -24,7 +24,7 @@ import com.example.grupo_04_tarea_12_ejercicio_01.utils.Converters;
                 Pais.class,
                 Aerolinea.class
         },
-        version = 1,
+        version = 2,
         exportSchema = false
 )
 @TypeConverters({Converters.class})
