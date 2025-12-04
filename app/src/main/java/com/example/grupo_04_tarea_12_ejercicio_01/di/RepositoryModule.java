@@ -1,6 +1,10 @@
 package com.example.grupo_04_tarea_12_ejercicio_01.di;
 
+import com.example.grupo_04_tarea_12_ejercicio_01.data.mock.FakeAeropuertoRepositoryImpl;
+import com.example.grupo_04_tarea_12_ejercicio_01.data.mock.FakeAsientoRepositoryImpl;
+import com.example.grupo_04_tarea_12_ejercicio_01.data.mock.FakeAvionRepositoryImpl;
 import com.example.grupo_04_tarea_12_ejercicio_01.data.mock.FakePagoRepositoryImpl;
+import com.example.grupo_04_tarea_12_ejercicio_01.data.mock.FakePaisRepositoryImpl;
 import com.example.grupo_04_tarea_12_ejercicio_01.data.mock.FakeReservaRepositoryImpl;
 import com.example.grupo_04_tarea_12_ejercicio_01.data.repository.*;
 import com.example.grupo_04_tarea_12_ejercicio_01.domain.Repository.*;
@@ -25,7 +29,7 @@ public abstract class RepositoryModule {
     @Binds
     @Singleton
     public abstract PaisRepository bindPaisRepository(
-            PaisRepositoryImpl paisRepositoryImpl
+            FakePaisRepositoryImpl paisRepositoryImpl
     );
 
     @Binds
@@ -49,7 +53,7 @@ public abstract class RepositoryModule {
     @Binds
     @Singleton
     public abstract AsientoRepository bindAsientoRepository(
-            AsientoRepositoryImpl asientoRepositoryImpl
+            FakeAsientoRepositoryImpl asientoRepositoryImpl
     );
 
     @Binds
@@ -61,13 +65,13 @@ public abstract class RepositoryModule {
     @Binds
     @Singleton
     public abstract AvionRepository bindAvionRepository(
-            AvionRepositoryImpl avionRepositoryImpl
+            FakeAvionRepositoryImpl avionRepositoryImpl
     );
 
     @Binds
     @Singleton
     public abstract AeropuertoRepository bindAeropuertoRepository(
-            AeropuertoRepositoryImpl aeropuertoRepositoryImpl
+            FakeAeropuertoRepositoryImpl aeropuertoRepositoryImpl
     );
 
     @Binds
