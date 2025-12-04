@@ -33,18 +33,15 @@ public class Avion {
     @ColumnInfo(name = "capacidad")
     private int capacidad;
 
-    // Constructor vacío
     public Avion() {
     }
 
-    // Constructor
     public Avion(int idAerolinea, String tipoAvion, int capacidad) {
         this.idAerolinea = idAerolinea;
         this.tipoAvion = tipoAvion;
         this.capacidad = capacidad;
     }
 
-    // Getters y Setters
     public int getIdAvion() {
         return idAvion;
     }

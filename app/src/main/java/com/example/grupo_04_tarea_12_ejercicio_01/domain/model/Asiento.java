@@ -19,7 +19,7 @@ import androidx.room.PrimaryKey;
                         entity = Reserva.class,
                         parentColumns = "idreserva",
                         childColumns = "idreserva",
-                        onDelete = ForeignKey.CASCADE
+                        onDelete = ForeignKey.SET_NULL
                 )
         },
         indices = {
@@ -37,7 +37,7 @@ public class Asiento {
     private int idVuelo;
 
     @ColumnInfo(name = "idreserva")
-    private int idReserva;
+    private Integer idReserva;
 
     @ColumnInfo(name = "fila")
     private int fila;
@@ -45,19 +45,17 @@ public class Asiento {
     @ColumnInfo(name = "estado")
     private String estado;
 
-    // Constructor vacío
     public Asiento() {
+        this.idReserva = 0;
     }
 
-    // Constructor
-    public Asiento(int idVuelo, int idReserva, int fila, String estado) {
+    public Asiento(int idVuelo, Integer idReserva, int fila, String estado) {
         this.idVuelo = idVuelo;
-        this.idReserva = idReserva;
+        this.idReserva = (idReserva != null && idReserva > 0) ? idReserva : 0;
         this.fila = fila;
         this.estado = estado;
     }
 
-    // Getters y Setters
     public int getIdAsiento() {
         return idAsiento;
     }
@@ -75,11 +73,12 @@ public class Asiento {
     }
 
     public int getIdReserva() {
-        return idReserva;
+        return (idReserva != null) ? idReserva : 0;
     }
 
     public void setIdReserva(int idReserva) {
-        this.idReserva = idReserva;
+
+        this.idReserva = (idReserva > 0) ? idReserva : 0;
     }
 
     public int getFila() {
@@ -96,5 +95,9 @@ public class Asiento {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public boolean tieneReserva() {
+        return idReserva != null && idReserva > 0;
     }
 }

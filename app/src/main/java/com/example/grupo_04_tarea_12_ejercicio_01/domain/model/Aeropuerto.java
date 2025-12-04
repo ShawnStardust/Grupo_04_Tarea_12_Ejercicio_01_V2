@@ -30,17 +30,14 @@ public class Aeropuerto {
     @ColumnInfo(name = "idpais")
     private int idPais;
 
-    // Constructor vacío
     public Aeropuerto() {
     }
 
-    // Constructor
     public Aeropuerto(String nombre, int idPais) {
         this.nombre = nombre;
         this.idPais = idPais;
     }
 
-    // Getters y Setters
     public int getIdAeropuerto() {
         return idAeropuerto;
     }

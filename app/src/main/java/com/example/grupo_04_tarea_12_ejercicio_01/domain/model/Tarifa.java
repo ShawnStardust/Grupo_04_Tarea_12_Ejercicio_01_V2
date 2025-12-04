@@ -20,18 +20,15 @@ public class Tarifa {
     @ColumnInfo(name = "impuesto")
     private double impuesto;
 
-    // Constructor vacío
     public Tarifa() {
     }
 
-    // Constructor
     public Tarifa(String clase, double precio, double impuesto) {
         this.clase = clase;
         this.precio = precio;
         this.impuesto = impuesto;
     }
 
-    // Getters y Setters
     public int getIdTarifa() {
         return idTarifa;
     }

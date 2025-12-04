@@ -52,11 +52,9 @@ public class Vuelo {
     @ColumnInfo(name = "idfila")
     private int idFila;
 
-    // Constructor vacío
     public Vuelo() {
     }
 
-    // Constructor
     public Vuelo(int idAeropuertoOrigen, int idAeropuertoDestino, int idAvion, int idFila) {
         this.idAeropuertoOrigen = idAeropuertoOrigen;
         this.idAeropuertoDestino = idAeropuertoDestino;
@@ -64,7 +62,6 @@ public class Vuelo {
         this.idFila = idFila;
     }
 
-    // Getters y Setters
     public int getIdVuelo() {
         return idVuelo;
     }

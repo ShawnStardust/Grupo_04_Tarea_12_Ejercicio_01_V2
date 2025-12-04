@@ -1,66 +1,78 @@
 package com.example.grupo_04_tarea_12_ejercicio_01.ui.flota;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.grupo_04_tarea_12_ejercicio_01.R;
+import com.example.grupo_04_tarea_12_ejercicio_01.ui.flota.Aeropuerto.AeropuertoListFragment;
+import com.example.grupo_04_tarea_12_ejercicio_01.ui.flota.Asiento.AsientoListFragment;
+import com.example.grupo_04_tarea_12_ejercicio_01.ui.flota.Avion.AvionListFragment;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FlotaFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
+// import com.example.grupo_04_tarea_12_ejercicio_01.ui.flota.avion.AvionesListFragment;
+// import com.example.grupo_04_tarea_12_ejercicio_01.ui.flota.asiento.AsientosListFragment;
+
 public class FlotaFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private Button btnVerAeropuertos;
+    private Button btnVerAviones;
+    private Button btnVerAsientos;
 
     public FlotaFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FlotaFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static FlotaFragment newInstance(String param1, String param2) {
-        FlotaFragment fragment = new FlotaFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_flota, container, false);
+        // Inflamos el layout que contiene los botones (fragment_flota_menu.xml o fragment_flota.xml)
+        View view = inflater.inflate(R.layout.fragment_flota, container, false);
+
+        // 1. Inicializar botones con los IDs del XML
+        btnVerAeropuertos = view.findViewById(R.id.btnVerAeropuertos);
+        btnVerAviones = view.findViewById(R.id.btnVerAviones);
+        btnVerAsientos = view.findViewById(R.id.btnVerAsientos);
+
+        // 2. Configurar listeners para la navegación
+        btnVerAeropuertos.setOnClickListener(v -> navigateToAeropuertos());
+        btnVerAviones.setOnClickListener(v -> navigateToAviones());
+        btnVerAsientos.setOnClickListener(v -> navigateToAsientos());
+
+        return view;
+    }
+
+    private void navigateToAeropuertos() {
+        // Instanciamos el fragmento de lista de Aeropuertos
+        Fragment aeropuertosListFragment = new AeropuertoListFragment();
+
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainer, aeropuertosListFragment);
+        transaction.addToBackStack(null); // Permite regresar al menú con el botón 'Atrás'
+        transaction.commit();
+    }
+
+    private void navigateToAviones() {
+
+
+        Fragment avionesListFragment = new AvionListFragment();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainer, avionesListFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    private void navigateToAsientos() {
+
+        Fragment asientosListFragment = new AsientoListFragment();
+        FragmentTransaction transaction = getParentFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragmentContainer, asientosListFragment);
+        transaction.addToBackStack(null);
+        transaction.commit();
     }
 }

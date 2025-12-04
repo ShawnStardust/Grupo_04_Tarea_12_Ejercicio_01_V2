@@ -50,11 +50,9 @@ public class Reserva {
     @ColumnInfo(name = "observacion")
     private String observacion;
 
-    // Constructor vacío
     public Reserva() {
     }
 
-    // Constructor
     public Reserva(int idPasajero, int idVuelo, double costo, Date fecha, String observacion) {
         this.idPasajero = idPasajero;
         this.idVuelo = idVuelo;
@@ -63,7 +61,6 @@ public class Reserva {
         this.observacion = observacion;
     }
 
-    // Getters y Setters
     public int getIdReserva() {
         return idReserva;
     }

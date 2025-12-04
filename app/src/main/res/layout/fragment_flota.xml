@@ -1,15 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp"
     tools:context=".ui.flota.FlotaFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Camones" />
+        android:layout_height="wrap_content"
+        android:text="🛠️ Gestión de Flota"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#3F51B5"
+        android:layout_marginBottom="24dp"/>
 
-</FrameLayout>
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aeropuertos"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Administración de hubs, destinos y ubicaciones geográficas."
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/btnVerAeropuertos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver Aeropuertos"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#03A9F4"/> </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Aviones"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Gestión de modelos, capacidad y aerolíneas asociadas."
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/btnVerAviones"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver Aviones"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#FF5722"/> </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardElevation="6dp"
+        app:cardCornerRadius="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Asientos"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:textColor="#333333"
+                android:layout_marginBottom="8dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Consulta de disponibilidad y estado (ocupado, libre) por vuelo."
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:layout_marginBottom="20dp"/>
+
+            <Button
+                android:id="@+id/btnVerAsientos"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ver Asientos"
+                android:textColor="#FFFFFF"
+                android:backgroundTint="#4CAF50"/> </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

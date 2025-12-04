@@ -24,7 +24,7 @@ import com.example.grupo_04_tarea_12_ejercicio_01.utils.Converters;
                 Pais.class,
                 Aerolinea.class
         },
-        version = 2,
+        version = 4,
         exportSchema = false
 )
 @TypeConverters({Converters.class})
@@ -59,9 +59,5 @@ public abstract class AppDataBase extends RoomDatabase {
             }
         }
         return INSTANCE;
-    }
-
-    public static void destroyInstance() {
-        INSTANCE = null;
     }
 }

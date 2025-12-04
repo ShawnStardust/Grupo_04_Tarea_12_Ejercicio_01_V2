@@ -44,11 +44,9 @@ public class Pago {
     @ColumnInfo(name = "impuesto")
     private double impuesto;
 
-    // Constructor vacío
     public Pago() {
     }
 
-    // Constructor
     public Pago(int idReserva, Date fecha, String tipoComprobante, String numComprobante,
                 double monto, double impuesto) {
         this.idReserva = idReserva;
@@ -59,7 +57,6 @@ public class Pago {
         this.impuesto = impuesto;
     }
 
-    // Getters y Setters
     public int getIdPago() {
         return idPago;
     }
